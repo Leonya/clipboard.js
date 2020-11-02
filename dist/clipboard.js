@@ -590,7 +590,7 @@ var clipboard_action_ClipboardAction = function () {
             this.fakeHandlerCallback = function () {
                 return _this.removeFake();
             };
-            this.fakeHandler = this.container.addEventListener('click', this.fakeHandlerCallback) || true;
+            this.fakeHandler = this.container.addEventListener('click', this.fakeHandlerCallback, true) || true;
 
             this.fakeElem = document.createElement('textarea');
             // Prevent zooming on iOS
@@ -624,7 +624,7 @@ var clipboard_action_ClipboardAction = function () {
         key: 'removeFake',
         value: function removeFake() {
             if (this.fakeHandler) {
-                this.container.removeEventListener('click', this.fakeHandlerCallback);
+                this.container.removeEventListener('click', this.fakeHandlerCallback, true);
                 this.fakeHandler = null;
                 this.fakeHandlerCallback = null;
             }
