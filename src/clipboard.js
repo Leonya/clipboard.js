@@ -1,6 +1,6 @@
 import ClipboardAction from './clipboard-action';
 import Emitter from 'tiny-emitter';
-import listen from 'good-listener';
+import listen from './listen';
 
 /**
  * Base class which takes one or more elements, adds event listeners to them,

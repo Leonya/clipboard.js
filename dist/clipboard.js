@@ -253,14 +253,11 @@ function listen(target, type, callback) {
 
     if (is.node(target)) {
         return listenNode(target, type, callback);
-    }
-    else if (is.nodeList(target)) {
+    } else if (is.nodeList(target)) {
         return listenNodeList(target, type, callback);
-    }
-    else if (is.string(target)) {
+    } else if (is.string(target)) {
         return listenSelector(target, type, callback);
-    }
-    else {
+    } else {
         throw new TypeError('First argument must be a String, HTMLElement, HTMLCollection, or NodeList');
     }
 }
@@ -278,10 +275,10 @@ function listenNode(node, type, callback) {
     node.addEventListener(type, callback);
 
     return {
-        destroy: function() {
+        destroy: function destroy() {
             node.removeEventListener(type, callback);
         }
-    }
+    };
 }
 
 /**
@@ -294,17 +291,17 @@ function listenNode(node, type, callback) {
  * @return {Object}
  */
 function listenNodeList(nodeList, type, callback) {
-    Array.prototype.forEach.call(nodeList, function(node) {
+    Array.prototype.forEach.call(nodeList, function (node) {
         node.addEventListener(type, callback);
     });
 
     return {
-        destroy: function() {
-            Array.prototype.forEach.call(nodeList, function(node) {
+        destroy: function destroy() {
+            Array.prototype.forEach.call(nodeList, function (node) {
                 node.removeEventListener(type, callback);
             });
         }
-    }
+    };
 }
 
 /**
@@ -317,11 +314,10 @@ function listenNodeList(nodeList, type, callback) {
  * @return {Object}
  */
 function listenSelector(selector, type, callback) {
-    return delegate(document.body, selector, type, callback);
+    return delegate(document.body, selector, type, callback, true);
 }
 
 module.exports = listen;
-
 
 /***/ }),
 /* 3 */
@@ -590,7 +586,7 @@ var clipboard_action_ClipboardAction = function () {
             this.fakeHandlerCallback = function () {
                 return _this.removeFake();
             };
-            this.fakeHandler = this.container.addEventListener('click', this.fakeHandlerCallback, true) || true;
+            this.fakeHandler = this.container.addEventListener('click', this.fakeHandlerCallback) || true;
 
             this.fakeElem = document.createElement('textarea');
             // Prevent zooming on iOS
@@ -624,7 +620,7 @@ var clipboard_action_ClipboardAction = function () {
         key: 'removeFake',
         value: function removeFake() {
             if (this.fakeHandler) {
-                this.container.removeEventListener('click', this.fakeHandlerCallback, true);
+                this.container.removeEventListener('click', this.fakeHandlerCallback);
                 this.fakeHandler = null;
                 this.fakeHandlerCallback = null;
             }
@@ -774,7 +770,7 @@ var clipboard_action_ClipboardAction = function () {
 var tiny_emitter = __webpack_require__(1);
 var tiny_emitter_default = /*#__PURE__*/__webpack_require__.n(tiny_emitter);
 
-// EXTERNAL MODULE: ./node_modules/good-listener/src/listen.js
+// EXTERNAL MODULE: ./src/listen.js
 var listen = __webpack_require__(2);
 var listen_default = /*#__PURE__*/__webpack_require__.n(listen);
 
