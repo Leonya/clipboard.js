@@ -1,5 +1,5 @@
 import Emitter from 'tiny-emitter';
-import listen from 'good-listener';
+import listen from './listen';
 import ClipboardAction from './clipboard-action';
 
 /**
